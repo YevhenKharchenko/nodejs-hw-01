@@ -4,8 +4,9 @@ import { createFakeContact } from '../utils/createFakeContact.js';
 import { getAllContacts } from './getAllContacts.js';
 
 const generateContacts = async (number) => {
+  const newContacts = Array.from({ length: number }, createFakeContact);
+
   try {
-    const newContacts = Array.from({ length: number }, createFakeContact);
     const existingContacts = await getAllContacts();
     const updatedContacts = [...existingContacts, ...newContacts];
     await fs.writeFile(PATH_DB, JSON.stringify(updatedContacts));
